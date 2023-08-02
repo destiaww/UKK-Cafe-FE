@@ -16,12 +16,13 @@ export default function DataTransaksi() {
     useEffect(() => {
         const fecthDatas = async () => {
             try {
-                const response = await axios.get("http://localhost:8080/transaksi/", { headers })
-                setTransaksi(response.data.transaksi)
+                const response = await axios.get("http://localhost:9000/transaksi/", { headers })
+                setTransaksi(response.data.data)
             } catch (err) {
                 console.log(err)
             }
         }
+
         fecthDatas()
     }, [])
 
@@ -53,6 +54,9 @@ export default function DataTransaksi() {
                         filterByDate(date);
                     }} />
                 </div>
+                <div>
+
+                </div>
             </div>
 
             <div className="overflow-hidden rounded-lg border border-gray-200 shadow-md m-5">
@@ -70,7 +74,7 @@ export default function DataTransaksi() {
                         {selectedDate === null || selectedDate === undefined ? (
                             <>
                                 {transaksi.map((transaksi) => (
-                                    <tr key={transaksi.id_transaksi} className="hover:bg-gray-50">
+                                    <tr key={transaksi.id} className="hover:bg-gray-50">
                                         <td className="px-6 py-4">{transaksi.user.nama_user}</td>
                                         <td className="px-6 py-4">{dateFormat(transaksi.tgl_transaksi)}</td>
                                         <td className="px-6 py-4">{transaksi.total}</td>

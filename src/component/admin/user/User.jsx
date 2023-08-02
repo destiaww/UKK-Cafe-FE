@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-export default function Menu() {
+export default function User() {
     const headers = {
         'Authorization': `Bearer ${sessionStorage.getItem('token')}`
     };
@@ -14,8 +14,8 @@ export default function Menu() {
     useEffect(() => {
         const fecthAllUser = async () => {
             try {
-                const res = await axios.get("http://localhost:8080/user/", {headers})
-                // console.log(res)
+                const res = await axios.get("http://localhost:9000/user", {headers})
+                console.log(res)
                 setUser(res.data.data)
                 console.log(res.data.data)
             } catch (err) {
@@ -34,7 +34,7 @@ export default function Menu() {
     //menghapus id
     const deleteId = async () => {
         try {
-            await axios.delete("http://localhost:8080/user/" + pickId, {headers})
+            await axios.delete("http://localhost:9000/user/" + pickId, {headers})
             window.location.reload()
         } catch (err) {
             console.log(err)
@@ -54,7 +54,7 @@ export default function Menu() {
                 <div className="flex flex-wrap gap-5 ">
                     <div className="w-full relative overflow-x-auto shadow-md sm:rounded-lg">
                         <table className="w-full text-sm text-left text-gray-500">
-                            <thead className="text-xs text-white uppercase bg-gray-800">
+                            <thead className="text-xs text-white uppercase bg-[#134e4a]">
                                 <tr>
                                     <th scope="col" className="px-6 py-3 text-center">
                                         Nama User

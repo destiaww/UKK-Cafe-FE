@@ -25,7 +25,7 @@ export default function EditMenu() {
         //mengambil nama menu untuk verifikasi
         const getMenu = async () => {
             try {
-                const response = await axios.get("http://localhost:8080/menu/", {headers})
+                const response = await axios.get("http://localhost:9000/menu/", {headers})
                 const nama = response.data.data.map(res => res.nama_menu)
                 setCheckMenu(nama)
                 console.log(nama)
@@ -36,7 +36,7 @@ export default function EditMenu() {
         //mengambil data yang akan di update
         const getDataFromId = async () => {
             try {
-                const res = await axios.get("http://localhost:8080/menu/" + idMenu, {headers})
+                const res = await axios.get("http://localhost:9000/menu/" + idMenu, {headers})
                 setPrevData(res.data.data)
                 setLastMenuName(res.data.data.nama_menu)
                 console.log(res.data)
@@ -68,7 +68,7 @@ export default function EditMenu() {
                 data.append('deskripsi', prevData.deskripsi)
                 data.append('gambar', selectImage)
                 data.append('harga', prevData.harga)
-                await axios.put("http://localhost:8080/menu/" + idMenu, data, {headers})
+                await axios.put("http://localhost:9000/menu/" + idMenu, data, {headers})
                 navigate("/menu")
             }
         } catch (err){
@@ -83,12 +83,12 @@ export default function EditMenu() {
     return (
         <div>
             <div className="mt-8 mx-16">
-                <div className="bg-gray-800 w-full relative overflow-x-auto shadow-md sm:rounded-lg">
+                <div className="bg-[#134e4a] w-full relative overflow-x-auto shadow-md sm:rounded-lg">
                     <form onSubmit={handleClick}>
                         <div className="grid gap-6 mb-4 md:grid-cols-2 mt-8 mx-8">
                             <div>
                                 <label htmlFor="nama" className="block mb-2 text-sm font-medium text-white">Nama Menu</label>
-                                <input value={prevData.nama_menu || ""} required type="text" id="nama" className="text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500" name="nama_menu" onChange={handleChange} autoComplete="off" />
+                                <input value={prevData.nama_menu || ""} required type="text" id="nama" className="text-sm rounded-lg block w-full p-2.5 bg-white border-gray-600 placeholder-gray-400 text-gray-700 focus:ring-blue-500 focus:border-blue-500" name="nama_menu" onChange={handleChange} autoComplete="off" />
                             </div>
                             <div>
                                 <label htmlFor="harga" className="block mb-2 text-sm font-medium text-white">Harga</label>
@@ -96,13 +96,13 @@ export default function EditMenu() {
                                     if (!/[0-9]/.test(event.key)) {
                                         event.preventDefault();
                                     }
-                                }} id="harga" className="text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500" name="harga" onChange={handleChange} autoComplete="off" />
+                                }} id="harga" className="text-sm rounded-lg block w-full p-2.5 bg-white border-gray-600 placeholder-gray-400 text-gray-700 focus:ring-blue-500 focus:border-blue-500" name="harga" onChange={handleChange} autoComplete="off" />
                             </div>
                         </div>
                         <div className="mx-8 mb-6">
                             <div className="mb-4">
                                 <label htmlFor="jenis" className="block mb-2 text-sm font-medium text-white">Jenis</label>
-                                <select value={prevData.jenis || ""} required id="jenis" className="text-sm rounded-lg block w-full p-2.5  bg-gray-700  border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500" name="jenis" onChange={handleChange} >
+                                <select value={prevData.jenis || ""} required id="jenis" className="text-sm rounded-lg block w-full p-2.5  bg-white border-gray-600 placeholder-gray-400 text-gray-700 focus:ring-blue-500 focus:border-blue-500" name="jenis" onChange={handleChange} >
                                     <option value="">Jenis</option>
                                     <option value="makanan">Makanan</option>
                                     <option value="minuman">Minuman</option>
@@ -113,7 +113,7 @@ export default function EditMenu() {
                                 <input className="block w-full text-sm border rounded-lg cursor-pointer text-gray-400 focus:outline-none bg-gray-700 border-gray-600 placeholder-gray-400" aria-describedby="user_avatar_help" id="file" type="file" name="gambar" accept="image/" onChange={e => setSelectImage(e.target.files[0])} />
                             </div>
                             <div>
-                                <label htmlFor="deskripsi" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Deskripsi</label>
+                                <label htmlFor="deskripsi" className="block mb-2 text-sm font-medium text-white dark:text-white">Deskripsi</label>
                                 <textarea value={prevData.deskripsi || ""} required name="deskripsi" onChange={handleChange} id="deskripsi" rows="4" className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></textarea>
                             </div>
                         </div>

@@ -24,7 +24,7 @@ export default function EditUser() {
         //mengambil username untuk verifikasi
         const getUsername = async () => {
             try {
-                const response = await axios.get("http://localhost:8080/user/", {headers})
+                const response = await axios.get("http://localhost:9000/user/", {headers})
                 const username = response.data.user.map(res => res.username)
                 setCheckUsername(username)
             } catch (err) {
@@ -34,7 +34,7 @@ export default function EditUser() {
         //mengambil data yang akan di update
         const getDataFromId = async () => {
             try {
-                const res = await axios.get("http://localhost:8080/user/" + idUser, {headers})
+                const res = await axios.get("http://localhost:9000/user/" + idUser, {headers})
                 res.data.data.password = ""
                 setPrevData(res.data.data)
                 setLastUsername(res.data.data.username)
@@ -60,7 +60,7 @@ export default function EditUser() {
             toast.error("Password kosong!");
         } else {
             try {
-                await axios.put("http://localhost:8080/user/" + idUser, prevData, {headers})
+                await axios.put("http://localhost:9000/user/" + idUser, prevData, {headers})
                 navigate("/")
             } catch (err) {
                 console.log(err)
@@ -76,29 +76,29 @@ export default function EditUser() {
     return (
         <div>
             <div className="mt-8 mx-16">
-                <div className="bg-gray-800 w-full relative overflow-x-auto shadow-md sm:rounded-lg">
+                <div className="bg-[#134e4a] w-full relative overflow-x-auto shadow-md sm:rounded-lg">
                     <form onSubmit={handleClick}>
                         <div className="grid gap-6 mb-6 md:grid-cols-2 mt-8 mx-8">
                             <div>
                                 <label htmlFor="nama" className="block mb-2 text-sm font-medium text-white">Nama</label>
-                                <input required type="text" id="nama" className="text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500" name="nama_user" value={prevData.nama_user || ""} onChange={handleChange} autoComplete="off" />
+                                <input required type="text" id="nama" className="text-sm rounded-lg block w-full p-2.5 bg-white border-gray-600 placeholder-gray-400 text-gray-700 focus:ring-blue-500 focus:border-blue-500" name="nama_user" value={prevData.nama_user || ""} onChange={handleChange} autoComplete="off" />
                             </div>
                             <div>
                                 <label htmlFor="role" className="block mb-2 text-sm font-medium text-white">Role</label>
-                                <select required id="role" className="text-sm rounded-lg block w-full p-2.5  bg-gray-700  border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500" value={prevData.role || ""} name="role" onChange={handleChange} >
+                                <select required id="role" className="text-sm rounded-lg block w-full p-2.5  bg-white border-gray-600 placeholder-gray-400 text-gray-700 focus:ring-blue-500 focus:border-blue-500" value={prevData.role || ""} name="role" onChange={handleChange} >
                                     <option value="">Role</option>
                                     <option value="kasir">Kasir</option>
                                     <option value="admin">Admin</option>
-                                    <option value="manager">Manager</option>
+
                                 </select>
                             </div>
                             <div>
                                 <label htmlFor="username" className="block mb-2 text-sm font-medium text-white">Username</label>
-                                <input required type="text" id="username" className="text-sm rounded-lg block w-full p-2.5   bg-gray-700   border-gray-600   placeholder-gray-400   text-white   focus:ring-blue-500   focus:border-blue-500" value={prevData.username || ""} name="username" onChange={handleChange} autoComplete="off" />
+                                <input required type="text" id="username" className="text-sm rounded-lg block w-full p-2.5   bg-white  border-gray-600   placeholder-gray-400   text-gray-700  focus:ring-blue-500   focus:border-blue-500" value={prevData.username || ""} name="username" onChange={handleChange} autoComplete="off" />
                             </div>
                             <div>
                                 <label htmlFor="password" className="block mb-2 text-sm font-medium text-white">Password</label>
-                                <input type="password" id="password" className="text-sm rounded-lg block w-full p-2.5   bg-gray-700   border-gray-600   placeholder-gray-400   text-white   focus:ring-blue-500   focus:border-blue-500"  name="password" onChange={handleChange} autoComplete="off" />
+                                <input type="password" id="password" className="text-sm rounded-lg block w-full p-2.5   bg-white   border-gray-600   placeholder-gray-400   text-gray-700   focus:ring-blue-500   focus:border-blue-500"  name="password" onChange={handleChange} autoComplete="off" />
                             </div>
                         </div>
                         <div>

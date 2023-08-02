@@ -20,7 +20,7 @@ import Riwayat from './component/kasir/Riwayat'
 
 //manager pages
 import LayoutManager from './component/shared/LayoutManager'
-import Chart from './component/manager/Chart'
+// import Chart from './component/manager/Chart'
 import DataTransaksi from './component/manager/DataTransaksi';
 
 function App() {
@@ -72,7 +72,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<LayoutManager />}>
-            <Route index element={<Chart />} />
+            {/* <Route index element={<Chart />} /> */}
             <Route path="/data_transaksi" element={<DataTransaksi />} />
             {/* <Route path="/tes_123" element={<Tes />} /> */}
           </Route>

@@ -12,8 +12,8 @@ export default function Meja() {
     };
     const [meja, setMeja] = useState([]);
 
-    const [checkNomor, setCheckNomor] = useState([])
-    const [lastNomor, setLastNomor] = useState([])
+    const [checknomer, setChecknomer] = useState([])
+    const [lastnomer, setLastnomer] = useState([])
 
     const [showModalDelete, setShowModalDelete] = useState(false);
     const [showModalAdd, setShowModalAdd] = useState(false);
@@ -22,22 +22,22 @@ export default function Meja() {
     const [pickId, setPickId] = useState("")
 
     const [addMeja, setAddMeja] = useState({
-        nomor_meja: "",
+        nomer_meja: "",
     })
 
     const [prevData, setPrevData] = useState({
-        nomor_meja: "",
+        nomer_meja: "",
     })
 
     //mengambil data
     useEffect(() => {
         const fecthAllMeja = async () => {
             try {
-                const response = await axios.get("http://localhost:8080/meja/", {headers})
+                const response = await axios.get("http://localhost:9000/meja/", {headers})
                 setMeja(response.data.data)
 
-                const nomor = response.data.meja.map(res => res.nomor_meja)
-                setCheckNomor(nomor)
+                const nomer = response.data.data.meja.map(res => res.nomer_meja)
+                setChecknomer(nomer)
 
             } catch (err) {
                 console.log(err)
@@ -55,7 +55,7 @@ export default function Meja() {
     //menghapus id
     const deleteId = async () => {
         try {
-            await axios.delete("http://localhost:8080/meja/" + pickId, {headers})
+            await axios.delete("http://localhost:9000/meja/" + pickId, {headers})
             window.location.reload()
         } catch (err) {
             console.log(err)
@@ -63,11 +63,11 @@ export default function Meja() {
     }
 
     //mengambil id yang akan di edit
-    const selectDataEdit = (id, nomor_meja) => {
+    const selectDataEdit = (id, nomer_meja) => {
         setPrevData({
-            nomor_meja: nomor_meja,
+            nomer_meja: nomer_meja,
         })
-        setLastNomor(nomor_meja)
+        setLastnomer(nomer_meja)
         setPickId(id)
         setShowModalEdit(true)
     }
@@ -82,12 +82,12 @@ export default function Meja() {
 
     const postMeja = async e => {
         e.preventDefault()
-        //verifikasi nomor yang sama
-        if (checkNomor.includes(addMeja.nomor_meja.trim())) {
-            toast.info("Nomor meja sudah terdaftar");
+        //verifikasi nomer yang sama
+        if (checknomer.includes(addMeja.nomer_meja.trim())) {
+            toast.info("nomer meja sudah terdaftar");
         } else {
             try {
-                await axios.post("http://localhost:8080/meja/", addMeja, {headers})
+                await axios.post("http://localhost:9000/meja/add", addMeja, {headers})
                 window.location.reload()
             } catch (err) {
                 console.log(err)
@@ -97,11 +97,11 @@ export default function Meja() {
 
     const putMeja = async e => {
         e.preventDefault()
-        if (prevData.nomor_meja !== lastNomor && checkNomor.includes(prevData.nomor_meja.trim())) {
-            toast.info("Nomor meja sudah terdaftar");
+        if (prevData.nomer_meja !== lastnomer && checknomer.includes(prevData.nomer_meja.trim())) {
+            toast.info("nomer meja sudah terdaftar");
         } else {
             try {
-                await axios.put("http://localhost:8080/meja/" + pickId, prevData, {headers})
+                await axios.put("http://localhost:9000/meja/" + pickId, prevData, {headers})
                 window.location.reload()
             } catch (err) {
                 console.log(err)
@@ -122,10 +122,10 @@ export default function Meja() {
                 <div className="flex flex-wrap gap-5 ">
                     <div className="w-full relative overflow-x-auto shadow-md sm:rounded-lg">
                         <table className="w-full text-sm text-left text-gray-500">
-                            <thead className="text-xs text-white uppercase bg-gray-800">
+                            <thead className="text-xs text-white uppercase bg-[#134e4a]">
                                 <tr>
                                     <th scope="col" className="px-6 py-3 text-center">
-                                        Nomor Meja
+                                        nomer Meja
                                     </th>
                                     <th scope="col" className="pl-6 py-3 text-right">
                                         <span className="sr-only">Edit / Delete</span>
@@ -135,9 +135,9 @@ export default function Meja() {
                             <tbody>
                                 {meja && meja.map((meja, index) => (
                                     <tr key={meja.id} className="bg-white border-b hover:bg-gray-50">
-                                        <td className="px-6 py-4 text-center">{meja.nomor_meja}</td>
+                                        <td className="px-6 py-4 text-center">{meja.nomer_meja}</td>
                                         <td className="pl-6 py-4 text-right">
-                                            <button onClick={() => selectDataEdit(meja.id, meja.nomor_meja)} className="font-medium text-blue-600 hover:underline">Edit</button>
+                                            <button onClick={() => selectDataEdit(meja.id, meja.nomer_meja)} className="font-medium text-blue-600 hover:underline">Edit</button>
                                             <button onClick={() => selectIdDelete(meja.id)} className="mx-4 font-medium text-red-600 hover:underline">  Delete</button>
                                         </td>
                                     </tr>
@@ -180,7 +180,7 @@ export default function Meja() {
                 <div>
                     <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
                         <div className="relative w-auto my-6 mx-auto max-w-3xl">
-                            <div className="relative rounded-lg shadow bg-gray-800">
+                            <div className="relative rounded-lg shadow bg-[#134e4a]">
                                 <button onClick={() => setShowModalAdd(false)} type="button" className="absolute top-3 right-2.5 text-gray-400 bg-transparent rounded-lg text-sm p-1.5 ml-auto inline-flex items-center hover:bg-gray-800 hover:text-white" data-modal-hide="authentication-modal">
                                     <svg aria-hidden="true" className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd"></path></svg>
                                     <span className="sr-only">Close modal</span>
@@ -189,12 +189,12 @@ export default function Meja() {
                                     <h3 className="mb-4 text-xl font-medium text-white">Tambahkan Meja</h3>
                                     <form className="space-y-6" onSubmit={postMeja}>
                                         <div>
-                                            <label htmlFor="nomor" className="block mb-2 text-sm font-medium text-white">Nomor Meja</label>
+                                            <label htmlFor="nomer" className="block mb-2 text-sm font-medium text-white">nomer Meja</label>
                                             <input onKeyPress={(event) => {
                                                 if (!/[0-9]/.test(event.key)) {
                                                     event.preventDefault();
                                                 }
-                                            }} type="text" id="nomor" className="text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500" name="nomor_meja" onChange={handleChange_Add} autoComplete="off" required />
+                                            }} type="text" id="nomer" className="text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500" name="nomer_meja" onChange={handleChange_Add} autoComplete="off" required />
                                         </div>
                                         {/* <div>
                                             <label htmlFor="status" className="block mb-2 text-sm font-medium text-white">Status</label>
@@ -239,12 +239,12 @@ export default function Meja() {
                                     <h3 className="mb-4 text-xl font-medium text-white">Update Meja</h3>
                                     <form className="space-y-6" onSubmit={putMeja}>
                                         <div>
-                                            <label htmlFor="nomor" className="block mb-2 text-sm font-medium text-white">Nomor Meja</label>
+                                            <label htmlFor="nomer" className="block mb-2 text-sm font-medium text-white">nomer Meja</label>
                                             <input onKeyPress={(event) => {
                                                 if (!/[0-9]/.test(event.key)) {
                                                     event.preventDefault();
                                                 }
-                                            }} type="text" value={prevData.nomor_meja || ""} id="nomor" className="text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500" name="nomor_meja" onChange={handleChange_Edit} autoComplete="off" required />
+                                            }} type="text" value={prevData.nomer_meja || ""} id="nomer" className="text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500" name="nomer_meja" onChange={handleChange_Edit} autoComplete="off" required />
                                         </div>
                                         {/* <div>
                                             <label htmlFor="status" className="block mb-2 text-sm font-medium text-white">Status</label>

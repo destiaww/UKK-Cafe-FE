@@ -18,7 +18,7 @@ export default function Menu() {
     useEffect(() => {
         const fecthAllMenu = async () => {
             try {
-                const res = await axios.get("http://localhost:8080/menu/", {headers})
+                const res = await axios.get("http://localhost:9000/menu/", {headers})
                 console.log(res)
                 setMenu(res.data.data)
             } catch (err) {
@@ -37,7 +37,7 @@ export default function Menu() {
     //menghapus id
     const deleteId = async () => {
         try {
-            await axios.delete("http://localhost:8080/menu/" + pickId, {headers})
+            await axios.delete("http://localhost:9000/menu/" + pickId, {headers})
             window.location.reload()
         } catch (err) {
             console.log(err)
@@ -57,7 +57,7 @@ export default function Menu() {
                 <div className="flex flex-wrap gap-5 ">
                     <div className="w-full relative overflow-x-auto shadow-md sm:rounded-lg">
                         <table className="table-fixed w-full text-sm text-left text-gray-500">
-                            <thead className="text-xs text-white uppercase bg-gray-800">
+                            <thead className="text-xs text-white uppercase bg-[#134e4a]">
                                 <tr>
                                     <th scope="col" className="px-6 py-3 text-center">
                                         Gambar
@@ -83,7 +83,7 @@ export default function Menu() {
                                 {menu && menu.map((menu, index) => (
                                     <tr key={menu.id} className="bg-white border-b hover:bg-gray-50">
                                         <td>
-                                            <img className="h-auto max-w-[100%]" src={`http://localhost:8080/foto/${menu.gambar}`} alt="product" />
+                                            <img className="h-auto max-w-[100%]" src={`http://localhost:9000/gambar/${menu.gambar}`} alt="product" />
                                         </td>
                                         <td className="px-6 py-4 text-center">{menu.nama_menu}</td>
                                         <td className="px-6 py-4 text-center">{menu.jenis}</td>

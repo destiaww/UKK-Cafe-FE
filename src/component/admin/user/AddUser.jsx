@@ -18,7 +18,7 @@ export default function AddUser() {
     useEffect(() => {
         const getUsername = async () => {
             try {
-                const response = await axios.get("http://localhost:8080/user/", {headers})
+                const response = await axios.get("http://localhost:9000/user/add", {headers})
                 const username = response.data.user.map(res => res.username)
                 setCheckUsername(username)
             } catch (err) {
@@ -47,7 +47,7 @@ export default function AddUser() {
             toast.info("Username sudah terdaftar");
         } else {
             try {
-                await axios.post("http://localhost:8080/user/", addUser, {headers})
+                await axios.post("http://localhost:9000/user/add", addUser, {headers})
                 navigate("/")
             } catch (err) {
                 console.log(err)
@@ -62,16 +62,16 @@ export default function AddUser() {
     return (
         <div>
             <div className="mt-8 mx-16">
-                <div className="bg-gray-800 w-full relative overflow-x-auto shadow-md sm:rounded-lg">
+                <div className="bg-[#134e4a] w-full relative overflow-x-auto shadow-md sm:rounded-lg">
                     <form onSubmit={handleClick}>
                         <div className="grid gap-6 mb-6 md:grid-cols-2 mt-8 mx-8">
                             <div>
                                 <label htmlFor="nama" className="block mb-2 text-sm font-medium text-white">Nama</label>
-                                <input type="text" id="nama" className="text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500" name="nama_user" onChange={handleChange} autoComplete="off" required />
+                                <input type="text" id="nama" className="text-sm rounded-lg block w-full p-2.5 bg-white border-gray-600 placeholder-gray-400 text-gray-400 focus:ring-blue-500 focus:border-blue-500" name="nama_user" onChange={handleChange} autoComplete="off" required />
                             </div>
                             <div>
                                 <label htmlFor="role" className="block mb-2 text-sm font-medium text-white">Role</label>
-                                <select id="role" className="text-sm rounded-lg block w-full p-2.5  bg-gray-700  border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500" name="role" onChange={handleChange} required>
+                                <select id="role" className="text-sm rounded-lg block w-full p-2.5  bg-white border-gray- placeholder-gray-400 text-gray-400 focus:ring-blue-500 focus:border-blue-500" name="role" onChange={handleChange} required>
                                     <option value="">Role</option>
                                     <option value="kasir">Kasir</option>
                                     <option value="admin">Admin</option>
@@ -80,11 +80,11 @@ export default function AddUser() {
                             </div>
                             <div>
                                 <label htmlFor="username" className="block mb-2 text-sm font-medium text-white">Username</label>
-                                <input type="text" id="username" className="text-sm rounded-lg block w-full p-2.5   bg-gray-700   border-gray-600   placeholder-gray-400   text-white   focus:ring-blue-500   focus:border-blue-500" name="username" onChange={handleChange} autoComplete="off" required />
+                                <input type="text" id="username" className="text-sm rounded-lg block w-full p-2.5   bg-white  border-gray-600   placeholder-gray-400   text-white   focus:ring-blue-500   focus:border-blue-500" name="username" onChange={handleChange} autoComplete="off" required />
                             </div>
                             <div>
                                 <label htmlFor="password" className="block mb-2 text-sm font-medium text-white">Password</label>
-                                <input type="password" id="password" className="text-sm rounded-lg block w-full p-2.5   bg-gray-700   border-gray-600   placeholder-gray-400   text-white   focus:ring-blue-500   focus:border-blue-500" name="password" onChange={handleChange} autoComplete="off" required />
+                                <input type="password" id="password" className="text-sm rounded-lg block w-full p-2.5   bg-gray-400   border-gray-600   placeholder-gray-400   text-white   focus:ring-blue-500   focus:border-blue-500" name="password" onChange={handleChange} autoComplete="off" required />
                             </div>
                         </div>
                         <div>

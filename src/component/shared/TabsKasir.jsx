@@ -26,8 +26,8 @@ export default function TabsKasir() {
         window.location.reload()
     }
     return (
-        <div className="bg-white h-16 px-4 flex justify-between items-center border-b border-gray-200">
-            <div className="flex flex-wrap text-sm font-medium text-center ">
+        <div className="bg-[#134e4a] h-16 px-4 flex justify-between items-center border-gray-200">
+            <div className="flex flex-wrap text-sm font-medium text-center text-white ">
                 {TABS_LINK.map((item) => (
                     <TabsLink key={item.key} item={item} />
                 ))}
